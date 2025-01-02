@@ -3,6 +3,7 @@ package com.mzamorano.phantom.listener;
 import com.mzamorano.phantom.command.Command;
 import com.mzamorano.phantom.command.HelloCommand;
 import com.mzamorano.phantom.str.StringReader;
+import com.mzamorano.phantom.util.Util;
 import net.dv8tion.jda.api.entities.Message;
 import net.dv8tion.jda.api.entities.User;
 import net.dv8tion.jda.api.events.message.MessageReceivedEvent;
@@ -34,7 +35,7 @@ public class MessageReceivedListener extends ListenerAdapter {
             return;
         }
 
-        String invocation = fields[0].replaceFirst("^" + prefix, "");
+        String invocation = Util.stringRemoveStart(fields[0], prefix);
         Command invokedCommand = commands.get(invocation);
         if (invokedCommand == null) {
             event.getChannel().sendMessage(s.read("help.command_not_recognized")).queue();
