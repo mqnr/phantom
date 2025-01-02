@@ -15,10 +15,11 @@ import java.util.Map;
 public class MessageReceivedListener extends ListenerAdapter {
     private final StringReader s;
     private final Map<String, Command> commands = new HashMap<>();
-    private final static String prefix = "!";
+    private String prefix;
 
     public MessageReceivedListener(StringReader s) {
         this.s = s;
+        prefix = s.read("prefix");
         commands.put("hello", new HelloCommand(s));
     }
 
