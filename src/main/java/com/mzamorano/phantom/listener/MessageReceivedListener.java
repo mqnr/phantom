@@ -15,11 +15,10 @@ import java.util.Map;
 public class MessageReceivedListener extends ListenerAdapter {
     private final StringReader s;
     private final Map<String, Command> commands = new HashMap<>();
-    private String prefix;
+    private static final String prefix = System.getenv("PHANTOM_DISCORD_PREFIX");
 
     public MessageReceivedListener(StringReader s) {
         this.s = s;
-        prefix = s.read("prefix");
         commands.put("hello", new HelloCommand(s));
     }
 
